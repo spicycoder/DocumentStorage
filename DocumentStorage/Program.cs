@@ -7,19 +7,16 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwaggerUI(
-        Theme.Futuristic,
-        options =>
-        {
-            options.SwaggerEndpoint("/openapi/v1.json", "Document Storage API");
-            options.EnableAllAdvancedOptions();
-            options.ShowBackToTopButton();
-            options.EnableThemeSwitcher();
-        });
-}
+app.MapOpenApi();
+app.UseSwaggerUI(
+    Theme.Futuristic,
+    options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Document Storage API");
+        options.EnableAllAdvancedOptions();
+        options.ShowBackToTopButton();
+        options.EnableThemeSwitcher();
+    });
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

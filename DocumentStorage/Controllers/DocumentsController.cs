@@ -12,20 +12,20 @@ public class DocumentsController(ILogger<DocumentsController> logger) : Controll
     {
         if (file == null || file.Length == 0)
         {
-            logger.LogError("File appears to be empty / invalid");
+            logger.LogError("⚠️ File appears to be empty / invalid");
             return BadRequest("No file uploaded.");
         }
 
         // Actual upload logic go here
         string documentId = Guid.NewGuid().ToString();
-        logger.LogInformation("File upload successful: {FileId} - {FileName}", documentId, file.FileName);
+        logger.LogInformation("📩 File upload successful: {FileId} - {FileName}", documentId, file.FileName);
         return Ok(new DocumentUploadResponse(documentId, file.FileName, "uploaded"));
     }
 
     [HttpGet("list")]
     public async Task<IActionResult> ListDocuments()
     {
-        logger.LogInformation("Listing all files");
+        logger.LogInformation("📃 Listing all files");
 
         // Actual listing logic go here
         Dictionary<string, string> documents = new()
@@ -40,7 +40,7 @@ public class DocumentsController(ILogger<DocumentsController> logger) : Controll
     [HttpGet("download/{id}")]
     public async Task<IActionResult> DownloadDocument(string id)
     {
-        logger.LogInformation("Downloading file: {Id}", id);
+        logger.LogInformation("📥 Downloading file: {Id}", id);
 
         // Actual download logic go here
         byte[] fileBytes = Array.Empty<byte>(); // Placeholder for file bytes
@@ -51,7 +51,7 @@ public class DocumentsController(ILogger<DocumentsController> logger) : Controll
     [HttpDelete("delete/{id}")]
     public async Task<IActionResult> DeleteDocument(string id)
     {
-        logger.LogInformation("Deleting file: {Id}", id);
+        logger.LogInformation("🗑️ Deleting file: {Id}", id);
 
         // Actual delete logic go here
         return Ok("File deleted successfully.");
