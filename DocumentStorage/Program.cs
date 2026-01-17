@@ -1,11 +1,24 @@
 using AspNetCore.Swagger.Themes;
+using DocumentStorage;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+builder.AddSqlServerDbContext<ProductsDbContext>("ProductsDB");
+builder.EnrichSqlServerDbContext<ProductsDbContext>();
+
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
+
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<ProductsDbContext>();
+db.Database.Migrate();
 
 app.MapOpenApi();
 app.UseSwaggerUI(

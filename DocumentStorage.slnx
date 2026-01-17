@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="DocumentStorage.AppHost/DocumentStorage.AppHost.csproj" Id="c677fa8b-cbeb-45c3-8276-0f6b7dc04201" />
+  <Project Path="DocumentStorage.ServiceDefaults/DocumentStorage.ServiceDefaults.csproj" />
   <Project Path="DocumentStorage/DocumentStorage.csproj" />
 </Solution>
