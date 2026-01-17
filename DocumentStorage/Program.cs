@@ -9,8 +9,10 @@ builder.AddServiceDefaults();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-builder.AddSqlServerDbContext<ProductsDbContext>("ProductsDB");
-builder.EnrichSqlServerDbContext<ProductsDbContext>();
+builder.Services.AddDbContext<ProductsDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductsDB"));
+});
 
 var app = builder.Build();
 
